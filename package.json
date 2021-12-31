@@ -1,5 +1,5 @@
 {
-  "name": "rentalXC",
+  "name": "rentalxc",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -8,7 +8,9 @@
   },
   "dependencies": {
     "@types/express": "^4.17.13",
-    "express": "^4.17.2"
+    "@types/uuid": "^8.3.3",
+    "express": "^4.17.2",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "ts-node-dev": "^1.1.8",
