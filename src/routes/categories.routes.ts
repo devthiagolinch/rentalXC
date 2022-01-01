@@ -23,4 +23,9 @@ categoriesRoutes.post("/", (request, response) => {
     return response.status(201).json({category})
 })
 
+// GET ALL CATEGORIES ROUTE
+categoriesRoutes.get("/", (req, res) => {
+    return res.json({categories})
+})
+
 export {categoriesRoutes}
