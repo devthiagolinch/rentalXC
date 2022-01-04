@@ -4,7 +4,6 @@ import { Category } from '../model/Category';
 
 const categoriesRoutes = Router();
 
-const categories: Category[] = []
 
 // POST ROUTE
 categoriesRoutes.post("/", (request, response) => {
