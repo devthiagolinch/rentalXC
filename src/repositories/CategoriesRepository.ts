@@ -1,3 +1,4 @@
+import { response } from "express";
 import { Category } from "../model/Category";
 
 interface ICreateCategoryDTO {
@@ -25,9 +26,25 @@ class CategoriesRepository {
         this.categories.push(category)
     };
 
+    edit(id: string,{name, description}: ICreateCategoryDTO) {
+        const category = this.categories.find((category) => category.id === id)
+
+        if(!category) {
+            return response.status(404).json({error: "Not found!"})
+        }
+
+        category.name = name;
+        category.description =  description;
+    };
+
     list(): Category[] {
         return this.categories
     }
+
+    findById(id: string) {
+        const category = this.categories.find(category => category.id === id);
+        return category;
+    };
 }
 
 export {CategoriesRepository}

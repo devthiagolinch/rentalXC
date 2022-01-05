@@ -1,6 +1,5 @@
 import { Router } from 'express';
-import { v4 as uuidv4 } from 'uuid';
-import { Category } from '../model/Category';
+
 import { CategoriesRepository } from '../repositories/CategoriesRepository';
 
 const categoriesRoutes = Router();
@@ -15,6 +14,22 @@ categoriesRoutes.post("/", (request, response) => {
     categoriesRepository.create({name, description})
 
     return response.status(201).send();
+})
+
+// PUT ROUTE
+categoriesRoutes.put("/:id", (request, response) => {
+    const {name, description} = request.body;
+    const {id} = request.params;
+
+    const categoryExists = categoriesRepository.findById(id)
+
+    if(!categoryExists) {
+        return response.status(404).json({error: "Category not Exists"})
+    }
+
+    categoriesRepository.edit(id,{name, description})
+
+    return response.status(201).send()
 })
 
 // GET ALL CATEGORIES ROUTE
