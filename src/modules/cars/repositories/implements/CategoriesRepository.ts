@@ -1,17 +1,25 @@
 import { response } from "express";
-import { Category } from "../model/Category";
 
-interface ICreateCategoryDTO {
-    name: string;
-    description: string;
-}
+import { Category } from "../../model/Category";
+import { ICategoriesRepository, ICreateCategoryDTO } from "../ICategoriesRepository";
 
-class CategoriesRepository {
-    private categories: Category[]
 
-    constructor(){
+class CategoriesRepository implements ICategoriesRepository {
+    private categories: Category[];
+
+    private static INSTANCE: CategoriesRepository;
+
+    private constructor(){
         this.categories = []
     };
+
+    public static getInstace(){
+        if(!CategoriesRepository.INSTANCE) {
+            CategoriesRepository.INSTANCE = new CategoriesRepository();
+        }
+
+        return CategoriesRepository.INSTANCE;
+    }
 
     create({name, description}: ICreateCategoryDTO) {
 
@@ -41,7 +49,7 @@ class CategoriesRepository {
         return this.categories
     }
 
-    findByName(name: string){
+    findByName(name: string): Category {
         const category = this.categories.find(category => category.name === name);
         return category;
     }
