@@ -1,7 +1,7 @@
 import { response } from "express";
 
 import { Category } from "../../model/Category";
-import { ICategoriesRepository, ICreateCategoryDTO } from "../ICategoriesRepository";
+import { ICategoriesRepository, ICategoryRepositoryDTO } from "../ICategoriesRepository";
 
 
 class CategoriesRepository implements ICategoriesRepository {
@@ -21,7 +21,7 @@ class CategoriesRepository implements ICategoriesRepository {
         return CategoriesRepository.INSTANCE;
     }
 
-    create({name, description}: ICreateCategoryDTO) {
+    create({name, description}: ICategoryRepositoryDTO) {
 
         const category = new Category();
     
@@ -34,7 +34,7 @@ class CategoriesRepository implements ICategoriesRepository {
         this.categories.push(category)
     };
 
-    edit(id: string,{name, description}: ICreateCategoryDTO) {
+    edit(id: string,{name, description}: ICategoryRepositoryDTO) {
         const category = this.categories.find((category) => category.id === id)
 
         if(!category) {
